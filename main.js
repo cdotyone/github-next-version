@@ -1,4 +1,7 @@
 const { exec } = require('child_process');
+
+console.log('The value of PORT is:', process.env.GITHUB_TOKEN);
+
 exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
     if (err) {
         console.log('\x1b[33m%s\x1b[0m', 'Could not find any revisions because: ');
