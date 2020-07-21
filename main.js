@@ -1,10 +1,6 @@
 const { exec } = require('child_process');
 
-function reverseString(str) {
-    return str.split("").reverse().join("");
-}
-
-console.log('===', reverseString(process.env.GITHUB_TOKEN));
+console.log('===', process.env.REVISION);
 
 exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
     if (err) {
