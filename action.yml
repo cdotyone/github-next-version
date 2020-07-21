@@ -1,5 +1,5 @@
 name: 'Get Next Version'
-description: 'Gets next version of project based on previous commit tag and commit messages.'
+description: 'Gets next version based on previous tag'
 branding:
   icon: 'tag'
   color: 'gray-dark'
