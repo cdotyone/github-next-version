@@ -5,7 +5,9 @@ branding:
   color: 'gray-dark'
 outputs:
   tag:
-    description: 'Latest tag'
+    description: 'last tag version'
+  version:
+    description: 'next tag version'
 runs:
   using: 'node12'
   main: 'main.js'
