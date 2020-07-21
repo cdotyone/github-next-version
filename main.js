@@ -8,7 +8,7 @@ exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
         process.exit(0);
         return;
     }
-
+    console.log(rev);
     console.log('git describe --tags '+rev);
     exec(`git describe --tags ${rev}`, (err, tag, stderr) => {
         if (err) {
