@@ -3,15 +3,9 @@ const { exec } = require('child_process');
 console.log('===', process.env.GITHUB_SHA);
 
 exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
-    if (err) {
-        console.log('\x1b[33m%s\x1b[0m', 'Could not find any revisions because: ');
-        console.log('\x1b[31m%s\x1b[0m', stderr);
-
-        console.log('::set-output name=version::v1.0.0');
-        process.exit(0);
-        return;
-    }
-    console.log(rev);
+    console.log('err',err);
+    console.log('rev',rev);
+    console.log('stderr',stderr);
 });
 
 exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
