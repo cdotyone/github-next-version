@@ -1,0 +1,11 @@
+name: 'Get Next Version'
+description: 'Gets next version of project based on previous commit tag and commit messages.'
+branding:
+  icon: 'tag'
+  color: 'gray-dark'
+outputs:
+  tag:
+    description: 'Latest tag'
+runs:
+  using: 'node12'
+  main: 'main.js'
