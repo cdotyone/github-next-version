@@ -1,6 +1,6 @@
 const { exec } = require('child_process');
 
-console.log('===', process.env.REVISION);
+console.log('===', process.env.GITHUB_SHA);
 
 exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
     if (err) {
