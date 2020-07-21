@@ -20,6 +20,9 @@ fix: will update the 3 (patch) number of the version
 feat: will update the 2 (minor) number of the version
 BREAKING will update the 1(major) number of the version
 
+It should always return a `version`, when there is at least one commit.
+`tag` will only be set if there was a previous tag.
+
 ## Example
 
 ```yaml

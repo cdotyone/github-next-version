@@ -4,7 +4,7 @@ exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
         console.log('\x1b[33m%s\x1b[0m', 'Could not find any revisions because: ');
         console.log('\x1b[31m%s\x1b[0m', stderr);
 
-        console.log('::set-output version=tag::v1.0.0');
+        console.log('::set-output name=version::v1.0.0');
         process.exit(0);
         return;
     }
@@ -26,8 +26,8 @@ exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
         if (err) {
             console.log('\x1b[33m%s\x1b[0m', 'Could not find any tags because: ');
             console.log('\x1b[31m%s\x1b[0m', stderr);
-            process.exit(1);
-
+            console.log('::set-output name=version::v1.0.0');
+            process.exit(0);
             return;
         }
 
@@ -55,7 +55,7 @@ exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
 
         tag = parts.join('.');
         console.log('\x1b[32m%s\x1b[0m', `Next version: ${tag}`);
-        console.log(`::set-output version=tag::${tag}`);
+        console.log(`::set-output name=version::${tag}`);
 
         process.exit(0);
     });
