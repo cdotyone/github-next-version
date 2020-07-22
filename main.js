@@ -1,10 +1,11 @@
+const core = require('@actions/core');
 const { exec } = require('child_process');
 exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
     if (err) {
         console.log('\x1b[33m%s\x1b[0m', 'Could not find any revisions because: ');
         console.log('\x1b[31m%s\x1b[0m', stderr);
 
-        console.log('::set-output name=version::v1.0.0');
+        core.setOutput("version","v1.0.0");
         process.exit(0);
         return;
     }
@@ -14,14 +15,14 @@ exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
         if (err) {
             console.log('\x1b[33m%s\x1b[0m', 'Could not find any tags because: ');
             console.log('\x1b[31m%s\x1b[0m', stderr);
-            console.log('::set-output name=version::v1.0.0');
+            core.setOutput("version","v1.0.0");
             process.exit(0);
             return;
         }
 
         tag = tag.trim();
         console.log('\x1b[32m%s\x1b[0m', `Found tag: ${tag}`);
-        console.log(`::set-output name=tag::${tag}`);
+        core.setOutput("tag",tag);
 
         console.log(`git log ${tag}..HEAD --oneline`);
         exec(`git log ${tag}..HEAD --oneline`, (err, message, stderr) => {
@@ -55,7 +56,7 @@ exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
 
             tag = parts.join('.');
             console.log('\x1b[32m%s\x1b[0m', `Next version: ${tag}`);
-            console.log(`::set-output name=version::${tag}`);
+            core.setOutput("version",tag);
         });
     });
 });
