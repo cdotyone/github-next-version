@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: 'Get Previous tag'
         id: semver
-        uses: "cdotyone/github-next-version@master"
+        uses: "cdotyone/github-next-version@main"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 ```
