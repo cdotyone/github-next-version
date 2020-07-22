@@ -10,4 +10,4 @@ outputs:
     description: 'next tag version'
 runs:
   using: 'node12'
-  main: 'main.js'
+  main: 'index.js'
