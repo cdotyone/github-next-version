@@ -16,9 +16,9 @@ This action has two output:
 The next version will be determined by commit messages since the last tag created.
 
 Commit message conventions:
-fix: will update the 3 (patch) number of the version
-feat: will update the 2 (minor) number of the version
-BREAKING will update the 1(major) number of the version
+* fix: will update the 3 (patch) number of the version
+* feat: will update the 2 (minor) number of the version
+* BREAKING will update the 1(major) number of the version
 
 It should always return a `version`, when there is at least one commit.
 `tag` will only be set if there was a previous tag.
