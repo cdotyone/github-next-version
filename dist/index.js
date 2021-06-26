@@ -620,11 +620,13 @@ exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
         console.log('\x1b[32m%s\x1b[0m', 'Tag not found trying config file');
 
         if(!commit_message) {
-            console.log('\x1b[33m%s\x1b[0m', 'Could not find last commit message because: ');
+            console.log('\x1b[33m%s\x1b[0m', 'Could not find last commit message because it was empty');
             console.log('\x1b[31m%s\x1b[0m', stderr);
             process.exit(1);
         }
         try {
+            version_file = core.addPath('/' + version_file);
+            console.log('\x1b[32m%s\x1b[0m', `reading config: ${version_file}`);
             fs.readFile(version_file, 'utf8', (err, data) => {
                 let tag = JSON.parse(data).version;
                 tag = tag.trim();
