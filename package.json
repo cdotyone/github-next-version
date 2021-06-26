@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "node-notifier": ">=8.0.1",
-    "@zeit/ncc": "^0.20.5",
+    "@vercel/ncc": "^0.28.6",
     "eslint": "^6.3.0",
     "jest": "^24.9.0"
   }

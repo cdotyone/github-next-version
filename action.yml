@@ -3,6 +3,10 @@ description: 'Gets next version based on previous tag'
 branding:
   icon: 'tag'
   color: 'gray-dark'
+inputs:
+  message:
+    description: 'commit message'
+    required: true
 outputs:
   tag:
     description: 'last tag version'
