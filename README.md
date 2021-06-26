@@ -31,7 +31,7 @@ jobs:
   generate:
     steps:
       - uses: actions/checkout@v2
-      - name: 'Get Previous tag'
+      - name: 'Get Next tag'
         id: semver
         uses: "cdotyone/github-next-version@main"
         env:
