@@ -1,0 +1,29 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Commit Lint'
+        uses: "cdotyone/github-commit-lint@main"
+        with:
+          message: "${{github.event.head_commit.message}}"
+      - name: 'Get Previous tag'
+        id: semver
+        uses: "cdotyone/github-next-version@main"
+        with:
+          message: "${{github.event.head_commit.message}}"
+        env:
+          GITHUB_TOKEN: "${{ github.token }}"
