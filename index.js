@@ -75,7 +75,8 @@ exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
             process.exit(1);
         }
         try {
-            version_file = core.addPath('/' + version_file);
+            console.log(process.cwd())
+            version_file = process.cwd() +'/' + version_file;
             console.log('\x1b[32m%s\x1b[0m', `reading config: ${version_file}`);
             fs.readFile(version_file, 'utf8', (err, data) => {
                 let tag = JSON.parse(data).version;
