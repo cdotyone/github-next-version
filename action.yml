@@ -6,7 +6,11 @@ branding:
 inputs:
   message:
     description: 'commit message'
+    required: false
+  version_file:
+    description: 'version file'
     required: true
+    default: 'package.json'
 outputs:
   tag:
     description: 'last tag version'
