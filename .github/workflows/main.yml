@@ -32,7 +32,8 @@ jobs:
           git config --global user.email "cdotyone"
           git config --global user.name "cdotyone"
           git add .
-          git commit -a -m "build: auto build" 
+          git commit -a -m "build: auto build"
+        continue-on-error: true
       - name: Conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
