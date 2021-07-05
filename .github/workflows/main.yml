@@ -5,11 +5,7 @@ name: CI
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  workflow_dispatch:
-  
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,3 +23,28 @@ jobs:
           message: "${{github.event.head_commit.message}}"
         env:
           GITHUB_TOKEN: "${{ github.token }}"
+      - name: Install Dependencies
+        run: npm install 
+      - name: Build
+        run: npm run build
+      - name: Release
+        run: |
+          git config --global user.email "cdotyone"
+          git config --global user.name "cdotyone"
+          git add .
+          git commit -a -m "build: auto build" 
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.github_token }}
+          output-file: "false"
+      - name: Create Release
+        uses: actions/create-release@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+        with:
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
