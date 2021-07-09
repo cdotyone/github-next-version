@@ -36,7 +36,5 @@ jobs:
         uses: "cdotyone/github-next-version@main"
         env:
           GITHUB_TOKEN: "${{ github.token }}"
-        with:
-          message: "${{github.event.head_commit.message}}"
 ```
 
