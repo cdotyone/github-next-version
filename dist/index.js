@@ -552,7 +552,6 @@ const { exec } = __nccwpck_require__(129);
 const fs = __nccwpck_require__(747);
 const core = __nccwpck_require__(186);
 
-let commit_message = core.getInput('message');
 let version_file = core.getInput('version_file') || 'package.json';
 
 const processMessage = function(message,tag) {
@@ -594,7 +593,7 @@ exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
             if (err) {
                 console.log('\x1b[33m%s\x1b[0m', 'Could not find any tags because: ');
                 console.log('\x1b[31m%s\x1b[0m', stderr);
-                console.log('::set-output name=version::v1.0.0');
+                console.log('::set-output name=version::v0.0.1');
                 process.exit(0);
                 return;
             }
@@ -618,27 +617,31 @@ exec('git rev-list --tags --max-count=1', (err, rev, stderr) => {
         });
     } else {
         console.log('\x1b[32m%s\x1b[0m', 'Tag not found trying config file');
+        exec("git show -s --format='%s'", (err, commit_message, stderr) => {
+            if (err) {
+                console.log('\x1b[33m%s\x1b[0m', 'Could not find any tags because: ');
+                console.log('\x1b[31m%s\x1b[0m', stderr);
+                console.log('::set-output name=version::v0.0.1');
+                process.exit(0);
+                return;
+            }
 
-        if(!commit_message) {
-            console.log('\x1b[33m%s\x1b[0m', 'Could not find last commit message because it was empty');
-            console.log('\x1b[31m%s\x1b[0m', stderr);
-            process.exit(1);
-        }
-        try {
-            version_file = process.cwd() +'/' + version_file;
-            console.log('\x1b[32m%s\x1b[0m', `reading config: ${version_file}`);
-            fs.readFile(version_file, 'utf8', (err, data) => {
-                let tag = JSON.parse(data).version;
-                tag = tag.trim();
-                console.log('\x1b[32m%s\x1b[0m', `Found tag: ${tag}`);
-                console.log(`::set-output name=tag::${tag}`);
-                processMessage(commit_message, tag);
-            });
-        } catch {
-            console.log('\x1b[33m%s\x1b[0m', 'Could not find last or next version: ');
-            console.log(`::set-output name=tag::v0.0.0`);
-            console.log(`::set-output name=version::v0.0.1`);
-        }
+            try {
+                version_file = process.cwd() + '/' + version_file;
+                console.log('\x1b[32m%s\x1b[0m', `reading config: ${version_file}`);
+                fs.readFile(version_file, 'utf8', (err, data) => {
+                    let tag = JSON.parse(data).version;
+                    tag = tag.trim();
+                    console.log('\x1b[32m%s\x1b[0m', `Found tag: ${tag}`);
+                    console.log(`::set-output name=tag::${tag}`);
+                    processMessage(commit_message, tag);
+                });
+            } catch {
+                console.log('\x1b[33m%s\x1b[0m', 'Could not find last or next version: ');
+                console.log(`::set-output name=tag::v0.0.0`);
+                console.log(`::set-output name=version::v0.0.1`);
+            }
+        });
     }
 });
 })();
