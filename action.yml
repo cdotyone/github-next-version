@@ -4,9 +4,6 @@ branding:
   icon: 'tag'
   color: 'gray-dark'
 inputs:
-  message:
-    description: 'commit message'
-    required: false
   version_file:
     description: 'version file'
     required: true
