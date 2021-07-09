@@ -1,4 +1,13 @@
-# 1.1.0 (2021-07-05)
+## [1.1.1](https://github.com/cdotyone/github-next-version/compare/v1.1.0...v1.1.1) (2021-07-09)
+
+
+### Bug Fixes
+
+* pull message from last commit instead of input variable ([8b16ec2](https://github.com/cdotyone/github-next-version/commit/8b16ec2de00e55bbae910cc73f2e54e9fc8729e1))
+
+
+
+# [1.1.0](https://github.com/cdotyone/github-next-version/compare/9132da7b33c61a316d7a6b48896f58fe8bc90125...v1.1.0) (2021-07-05)
 
 
 ### Bug Fixes
